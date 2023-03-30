@@ -17,5 +17,13 @@ pipeline {
                 sh 'npm run build'
             }
         }
+        stage("SonarQube Test"){
+             agent any
+                steps{
+                   withSonarQubeEnv('sonar-server') {
+                      sh 'mvn clean package sonar:sonar'
+                     }
+                   }
+                }
     }
 }
